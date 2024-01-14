@@ -1,0 +1,89 @@
+{
+	"root": true,
+	"extends": [
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react/recommended",
+		"plugin:react-native/all",
+		"plugin:import/recommended",
+		"plugin:import/typescript",
+		"prettier"
+	],
+	"plugins": [
+		"@typescript-eslint",
+		"react",
+		"react-native",
+		"prettier",
+		"import"
+	],
+	"rules": {
+		"react-native/no-color-literals": "off",
+		"react-native/no-raw-text": [
+			"error",
+			{
+				"skip": ["Strong"]
+			}
+		],
+		"@typescript-eslint/consistent-type-imports": [
+			"error",
+			{
+				"prefer": "type-imports",
+				"disallowTypeAnnotations": true,
+				"fixStyle": "inline-type-imports"
+			}
+		],
+		"import/order": [
+			"error",
+			{
+				"pathGroups": [
+					{
+						"pattern": "react",
+						"group": "builtin",
+						"position": "before"
+					},
+					{
+						"pattern": "react-native",
+						"group": "builtin",
+						"position": "before"
+					},
+					{
+						"pattern": "react-native-*",
+						"group": "builtin",
+						"position": "after"
+					},
+					{
+						"pattern": "expo-*",
+						"group": "builtin",
+						"position": "before"
+					}
+				],
+				"pathGroupsExcludedImportTypes": ["react", "^react-native$"],
+				"newlines-between": "always-and-inside-groups",
+				"groups": [
+					"type",
+					"builtin",
+					"external",
+					"index",
+					"parent",
+					"sibling",
+					"internal",
+					"object"
+				],
+				"alphabetize": {
+					"order": "asc",
+					"orderImportKind": "asc"
+				}
+			}
+		]
+	},
+	"settings": {
+		"import/parsers": {
+			"@typescript-eslint/parser": [".ts", ".tsx"]
+		},
+		"import/internal-regex": "^~/",
+		"import/resolver": {
+			"typescript": {
+				"alwaysTryTypes": true
+			}
+		}
+	}
+}
