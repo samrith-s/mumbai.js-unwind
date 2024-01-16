@@ -1,33 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { ScrollView, StyleSheet } from "react-native";
+import { useWindowDimensions } from "react-native";
 
-import { COLORS_LIST } from "./Colors.constants";
+import { GestureDetector } from "react-native-gesture-handler";
+import Animated, {
+	useAnimatedStyle,
+	withTiming,
+} from "react-native-reanimated";
 
-import { Swatch } from "./Swatch";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Box } from "~/components/Box";
-import { Spacer } from "~/components/Spacer";
+import { ColorsInfoBox } from "./ColorsInfoBox";
+
+import { useColorsGesture } from "./useColorsGesture";
+
+import { Breather } from "~/components/Breather";
 
 export function Colors() {
+	const { width, height } = useWindowDimensions();
+	const insets = useSafeAreaInsets();
+
+	const [count, setCount] = useState(0);
+
+	const { pan, color } = useColorsGesture(setCount);
+
+	const style = useAnimatedStyle(() => ({
+		backgroundColor: withTiming(color.value, {
+			duration: 800,
+		}),
+	}));
+
 	return (
-		<Box>
-			<ScrollView contentContainerStyle={styles.scrollContainer}>
-				<Spacer header />
-				{COLORS_LIST.map((color) => (
-					<Swatch
-						key={color}
-						color={color}
-					/>
-				))}
-				<Spacer />
-			</ScrollView>
-		</Box>
+		<GestureDetector gesture={pan}>
+			<Animated.View
+				style={[
+					{
+						width: width,
+						height: height,
+						paddingTop: insets.top,
+						paddingBottom: insets.bottom,
+					},
+					style,
+				]}
+			>
+				<Breather />
+				<ColorsInfoBox count={count} />
+			</Animated.View>
+		</GestureDetector>
 	);
 }
-
-const styles = StyleSheet.create({
-	scrollContainer: {
-		paddingHorizontal: 10,
-	},
-});

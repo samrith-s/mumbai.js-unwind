@@ -11,6 +11,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
 	Lato_400Regular,
 	Lato_700Bold,
+	Lato_900Black,
 	useFonts,
 } from "@expo-google-fonts/lato";
 import { NavigationContainer, type Theme } from "@react-navigation/native";
@@ -38,6 +39,7 @@ export function Providers({ children }: ProvidersProps) {
 	const [fontLoaded] = useFonts({
 		Lato_400Regular,
 		Lato_700Bold,
+		Lato_900Black,
 	});
 
 	useEffect(() => {

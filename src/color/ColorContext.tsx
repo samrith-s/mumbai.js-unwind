@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
 export type ColorContextValue = {
-	color: string;
-	setColor: (color: string) => void;
+	color: number;
+	setColor: (color: number) => void;
 };
 
 export const ColorContext = createContext<ColorContextValue>({
-	color: "",
+	color: 0,
 	setColor: () => {},
 });

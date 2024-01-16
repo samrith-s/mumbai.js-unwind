@@ -20,7 +20,7 @@
 		"react-native/no-raw-text": [
 			"error",
 			{
-				"skip": ["Strong"]
+				"skip": ["Strong", "Bold"]
 			}
 		],
 		"@typescript-eslint/consistent-type-imports": [
@@ -31,6 +31,7 @@
 				"fixStyle": "inline-type-imports"
 			}
 		],
+		"import/default": "off",
 		"import/order": [
 			"error",
 			{

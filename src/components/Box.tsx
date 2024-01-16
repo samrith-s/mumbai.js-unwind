@@ -7,8 +7,8 @@ import { GlobalStyles } from "~/styles";
 export function Box({ style, children, ...rest }: ViewProps) {
 	return (
 		<View
-			style={[GlobalStyles.container, style]}
 			{...rest}
+			style={[GlobalStyles.container, style]}
 		>
 			{children}
 		</View>

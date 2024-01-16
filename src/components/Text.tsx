@@ -15,16 +15,30 @@ export function Text({ children, style, ...rest }: TextProps) {
 
 export function Strong({ children, style, ...rest }: TextProps) {
 	return (
-		<RNText
-			style={[styles.baseText, style, styles.baseStrong]}
+		<Text
+			style={[styles.baseStrong, style]}
 			{...rest}
 		>
 			{children}
-		</RNText>
+		</Text>
+	);
+}
+
+export function Bold({ children, style, ...rest }: TextProps) {
+	return (
+		<Text
+			style={[styles.baseBold, style]}
+			{...rest}
+		>
+			{children}
+		</Text>
 	);
 }
 
 const styles = StyleSheet.create({
+	baseBold: {
+		fontFamily: "Lato_900Black",
+	},
 	baseStrong: {
 		fontFamily: "Lato_700Bold",
 	},
