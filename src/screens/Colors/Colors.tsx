@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useWindowDimensions } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { GestureDetector } from "react-native-gesture-handler";
 import Animated, {
@@ -8,18 +8,15 @@ import Animated, {
 	withTiming,
 } from "react-native-reanimated";
 
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 import { ColorsInfoBox } from "./ColorsInfoBox";
 
 import { useColorsGesture } from "./useColorsGesture";
 
 import { Breather } from "~/components/Breather";
+import { Intro } from "~/components/Intro";
+import { GlobalStyles } from "~/styles";
 
 export function Colors() {
-	const { width, height } = useWindowDimensions();
-	const insets = useSafeAreaInsets();
-
 	const [count, setCount] = useState(0);
 
 	const { pan, color } = useColorsGesture(setCount);
@@ -32,20 +29,22 @@ export function Colors() {
 
 	return (
 		<GestureDetector gesture={pan}>
-			<Animated.View
-				style={[
-					{
-						width: width,
-						height: height,
-						paddingTop: insets.top,
-						paddingBottom: insets.bottom,
-					},
-					style,
-				]}
-			>
+			<Animated.View style={[GlobalStyles.container, style]}>
 				<Breather />
+				<View style={styles.content}>
+					<Intro />
+				</View>
 				<ColorsInfoBox count={count} />
 			</Animated.View>
 		</GestureDetector>
 	);
 }
+
+const styles = StyleSheet.create({
+	content: {
+		...StyleSheet.absoluteFillObject,
+		alignItems: "center",
+		gap: 40,
+		justifyContent: "center",
+	},
+});

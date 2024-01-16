@@ -4,6 +4,8 @@ import { View, StyleSheet } from "react-native";
 
 import { BlurView } from "expo-blur";
 
+import { Feather } from "@expo/vector-icons";
+
 import { COLORS_LIST_LENGTH } from "~/colors";
 import { BackButton } from "~/components/BackButton";
 import { Text } from "~/components/Text";
@@ -15,6 +17,19 @@ export type ColorsInfoBoxProps = {
 export function ColorsInfoBox({ count }: ColorsInfoBoxProps) {
 	return (
 		<View style={styles.infoBox}>
+			<View style={styles.actionBox}>
+				<Feather
+					name="arrow-left"
+					size={24}
+					color="white"
+				/>
+				<Text>Swipe</Text>
+				<Feather
+					name="arrow-right"
+					size={24}
+					color="white"
+				/>
+			</View>
 			<BlurView
 				tint="light"
 				intensity={10}
@@ -31,6 +46,13 @@ export function ColorsInfoBox({ count }: ColorsInfoBoxProps) {
 }
 
 const styles = StyleSheet.create({
+	actionBox: {
+		alignItems: "center",
+		flexDirection: "row",
+		gap: 20,
+		justifyContent: "center",
+		opacity: 0.5,
+	},
 	info: {
 		alignItems: "center",
 		borderRadius: 999,
@@ -47,10 +69,11 @@ const styles = StyleSheet.create({
 	infoBox: {
 		alignItems: "center",
 		bottom: 50,
-		flexDirection: "row",
+		gap: 10,
 		justifyContent: "center",
 		left: 0,
 		position: "absolute",
 		right: 0,
+		zIndex: 999,
 	},
 });

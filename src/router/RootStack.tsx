@@ -1,10 +1,9 @@
 import React from "react";
 
 import {
-	TransitionPresets,
-	createStackNavigator,
-	type StackNavigationOptions,
-} from "@react-navigation/stack";
+	createNativeStackNavigator,
+	type NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 
 import { Routes, type RootStackParamsList } from "./routes";
 
@@ -12,11 +11,11 @@ import { Breathe } from "~/screens/Breathe";
 import { Colors } from "~/screens/Colors";
 import { Home } from "~/screens/Home";
 
-const Stack = createStackNavigator<RootStackParamsList>();
+const Stack = createNativeStackNavigator<RootStackParamsList>();
 
-const STACK_SCREEN_OPTIONS: StackNavigationOptions = {
+const STACK_SCREEN_OPTIONS: NativeStackNavigationOptions = {
 	headerShown: false,
-	...TransitionPresets.ScaleFromCenterAndroid,
+	animation: "fade",
 };
 
 export default function RootStack() {

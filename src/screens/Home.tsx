@@ -8,9 +8,9 @@ import { useColor } from "~/color";
 import { Breather } from "~/components/Breather";
 import { Button } from "~/components/Button";
 
-import { Bold, Strong, Text } from "~/components/Text";
+import { Intro } from "~/components/Intro";
 import { Routes } from "~/router/routes";
-import { GlobalStyles, Palette } from "~/styles";
+import { GlobalStyles } from "~/styles";
 
 export function Home() {
 	const navigation = useNavigation();
@@ -29,12 +29,7 @@ export function Home() {
 				<Breather />
 			</View>
 			<View style={styles.inner}>
-				<Bold style={styles.title}>Unwind</Bold>
-
-				<Text style={[styles.textOffset, styles.subtitle]}>
-					The simplest way to <Strong style={styles.textBold}>unwind</Strong>,
-					is to <Strong style={styles.textBold}>breathe</Strong>.
-				</Text>
+				<Intro />
 
 				<View style={styles.buttonGroup}>
 					<Button
@@ -76,7 +71,7 @@ const styles = StyleSheet.create({
 		top: 0,
 	},
 	button: {
-		backgroundColor: "rgba(255,255,255,0.1)",
+		backgroundColor: "rgba(255,255,255,0.01)",
 		marginTop: 28,
 		width: "auto",
 	},
@@ -86,27 +81,11 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		...GlobalStyles.container,
-		padding: 20,
 		position: "relative",
 	},
 	inner: {
 		alignItems: "center",
 		flex: 1,
 		justifyContent: "center",
-	},
-	subtitle: {
-		marginTop: 0,
-	},
-	textBold: {
-		fontWeight: "700",
-	},
-	textOffset: {
-		color: Palette.FOREGROUND_OFFSET,
-	},
-	title: {
-		color: Palette.FOREGROUND,
-		flexShrink: 0,
-		fontSize: 84,
-		fontWeight: "700",
 	},
 });
