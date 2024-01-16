@@ -2,11 +2,17 @@ import React from "react";
 
 import { StyleSheet, View } from "react-native";
 
+import { StackActions, useNavigation } from "@react-navigation/native";
+
 import { Button } from "~/components/Button";
 
 import { Strong, Text } from "~/components/Text";
+import { Routes } from "~/router/routes";
+import { GlobalStyles, Palette } from "~/styles";
 
 export function Home() {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
 			<Strong style={styles.title}>Unwind</Strong>
@@ -18,17 +24,30 @@ export function Home() {
 				style={styles.button}
 				label="Breathe"
 			/>
+			<Text
+				style={styles.altButton}
+				onPress={() => {
+					navigation.dispatch(StackActions.push(Routes.COLORS));
+				}}
+			>
+				Set color
+			</Text>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
+	altButton: {
+		fontSize: 12,
+		marginTop: 14,
+	},
 	button: {
 		marginTop: 28,
+		width: "50%",
 	},
 	container: {
+		...GlobalStyles.container,
 		alignItems: "center",
-		flex: 1,
 		justifyContent: "center",
 		padding: 20,
 	},
@@ -39,10 +58,10 @@ const styles = StyleSheet.create({
 		fontWeight: "700",
 	},
 	textOffset: {
-		color: "#c1c1c1",
+		color: Palette.FOREGROUND_OFFSET,
 	},
 	title: {
-		color: "#333",
+		color: Palette.BACKGROUND_OFFSET,
 		flexShrink: 0,
 		fontSize: 84,
 		fontWeight: "700",

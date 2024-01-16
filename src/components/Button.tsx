@@ -11,6 +11,8 @@ import {
 
 import { Text } from "./Text";
 
+import { Palette } from "~/styles";
+
 export type ButtonProps = PressableProps & {
 	children?: never;
 	label: string;
@@ -30,8 +32,10 @@ export function Button({ label, style, labelStyle, ...rest }: ButtonProps) {
 
 const styles = StyleSheet.create({
 	button: {
-		backgroundColor: "#333",
+		alignItems: "center",
+		backgroundColor: Palette.BACKGROUND_OFFSET,
 		borderRadius: 999,
+		justifyContent: "center",
 		paddingHorizontal: 24,
 		paddingVertical: 12,
 	},
