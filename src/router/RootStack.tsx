@@ -101,8 +101,6 @@ const styles = StyleSheet.create({
 	header: {
 		alignItems: "center",
 		backgroundColor: "transparent",
-		borderBottomColor: "#242525",
-		borderBottomWidth: 1,
 		flexDirection: "row",
 		gap: 10,
 		paddingHorizontal: 10,

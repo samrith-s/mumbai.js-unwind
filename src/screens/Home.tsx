@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 
 import { StackActions, useNavigation } from "@react-navigation/native";
 
+import { useColor } from "~/color";
 import { Button } from "~/components/Button";
 
 import { Strong, Text } from "~/components/Text";
@@ -12,6 +13,7 @@ import { GlobalStyles, Palette } from "~/styles";
 
 export function Home() {
 	const navigation = useNavigation();
+	const { color } = useColor();
 
 	return (
 		<View style={styles.container}>
@@ -21,7 +23,12 @@ export function Home() {
 				to <Strong style={styles.textBold}>breathe</Strong>.
 			</Text>
 			<Button
-				style={styles.button}
+				style={[
+					styles.button,
+					{
+						backgroundColor: color,
+					},
+				]}
 				label="Breathe"
 			/>
 			<Text

@@ -15,6 +15,9 @@ import {
 } from "@expo-google-fonts/lato";
 import { NavigationContainer, type Theme } from "@react-navigation/native";
 
+import { ColorProvider } from "./color";
+import { Palette } from "./styles";
+
 export type ProvidersProps = {
 	children: React.ReactNode;
 };
@@ -22,12 +25,12 @@ export type ProvidersProps = {
 const NAVIGATOR_THEME: Theme = {
 	dark: true,
 	colors: {
-		border: "#222",
-		notification: "#000",
-		text: "#fff",
-		primary: "#fff",
-		background: "#141515",
-		card: "#141515",
+		border: Palette.BORDER,
+		notification: Palette.NOTIFICATION,
+		text: Palette.FOREGROUND,
+		primary: Palette.FOREGROUND,
+		background: Palette.BACKGROUND,
+		card: Palette.BACKGROUND,
 	},
 };
 
@@ -44,11 +47,13 @@ export function Providers({ children }: ProvidersProps) {
 	}, [fontLoaded]);
 
 	return (
-		<SafeAreaProvider>
-			<NavigationContainer theme={NAVIGATOR_THEME}>
-				<ProvidersInner>{children}</ProvidersInner>
-			</NavigationContainer>
-		</SafeAreaProvider>
+		<ColorProvider>
+			<SafeAreaProvider>
+				<NavigationContainer theme={NAVIGATOR_THEME}>
+					<ProvidersInner>{children}</ProvidersInner>
+				</NavigationContainer>
+			</SafeAreaProvider>
+		</ColorProvider>
 	);
 }
 
