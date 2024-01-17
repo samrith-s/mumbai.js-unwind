@@ -18,18 +18,20 @@ export type BackButtonProps = {
 	intensity?: number;
 	tint?: BlurTint;
 	style?: StyleProp<ViewStyle>;
+	iconOnly?: boolean;
 };
 
 export function BackButton({
 	style,
 	intensity,
 	tint = "dark",
+	iconOnly,
 }: BackButtonProps) {
 	const navigation = useNavigation();
 
 	return (
 		<Pressable
-			style={[styles.cross, style]}
+			style={[styles.cross, iconOnly && styles.crossIconOnly, style]}
 			onPress={() => {
 				if (navigation.canGoBack()) {
 					navigation.goBack();
@@ -39,14 +41,14 @@ export function BackButton({
 			<BlurView
 				intensity={intensity}
 				tint={tint}
-				style={styles.crossInner}
+				style={[styles.crossInner, iconOnly && styles.crossInnerIconOnly]}
 			>
 				<Feather
-					name="arrow-left"
-					size={24}
+					name="check"
+					size={iconOnly ? 18 : 24}
 					color="white"
 				/>
-				<Text>Done</Text>
+				{!iconOnly && <Text>Done</Text>}
 			</BlurView>
 		</Pressable>
 	);
@@ -55,10 +57,13 @@ export function BackButton({
 const styles = StyleSheet.create({
 	cross: {
 		borderRadius: 999,
-		height: "auto",
+		height: 36,
 		overflow: "hidden",
 		width: "auto",
 		zIndex: 999,
+	},
+	crossIconOnly: {
+		width: "auto",
 	},
 	crossInner: {
 		alignItems: "center",
@@ -68,5 +73,8 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		paddingHorizontal: 12,
 		paddingVertical: 4,
+	},
+	crossInnerIconOnly: {
+		gap: 0,
 	},
 });

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -16,8 +16,11 @@ import {
 } from "@expo-google-fonts/lato";
 import { NavigationContainer, type Theme } from "@react-navigation/native";
 
-import { ColorProvider } from "./color";
+import { ColorProvider, useColor } from "./color";
+import { Breather } from "./components/Breather";
 import { Palette } from "./styles";
+
+SplashScreen.preventAutoHideAsync();
 
 export type ProvidersProps = {
 	children: React.ReactNode;
@@ -36,18 +39,6 @@ const NAVIGATOR_THEME: Theme = {
 };
 
 export function Providers({ children }: ProvidersProps) {
-	const [fontLoaded] = useFonts({
-		Lato_400Regular,
-		Lato_700Bold,
-		Lato_900Black,
-	});
-
-	useEffect(() => {
-		if (fontLoaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [fontLoaded]);
-
 	return (
 		<ColorProvider>
 			<SafeAreaProvider>
@@ -60,6 +51,36 @@ export function Providers({ children }: ProvidersProps) {
 }
 
 function ProvidersInner({ children }: ProvidersProps) {
+	const { color } = useColor();
+
+	const [fontLoaded] = useFonts({
+		Lato_400Regular,
+		Lato_700Bold,
+		Lato_900Black,
+	});
+
+	useEffect(() => {
+		if (fontLoaded) {
+			SplashScreen.hideAsync();
+		}
+	}, [fontLoaded]);
+
+	if (!fontLoaded) {
+		return (
+			<View
+				style={[
+					styles.container,
+					styles.placeholder,
+					{
+						backgroundColor: color,
+					},
+				]}
+			>
+				<Breather />
+			</View>
+		);
+	}
+
 	return (
 		<GestureHandlerRootView style={styles.container}>
 			<StatusBar style="dark" />
@@ -71,5 +92,8 @@ function ProvidersInner({ children }: ProvidersProps) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+	},
+	placeholder: {
+		opacity: 0.25,
 	},
 });

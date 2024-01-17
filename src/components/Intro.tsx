@@ -10,7 +10,10 @@ import { Palette } from "~/styles";
 
 export function Intro() {
 	return (
-		<Animated.View sharedTransitionTag="intro">
+		<Animated.View
+			style={styles.container}
+			sharedTransitionTag="intro"
+		>
 			<Bold style={styles.title}>Unwind</Bold>
 
 			<Text style={[styles.textOffset, styles.subtitle]}>
@@ -22,6 +25,10 @@ export function Intro() {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		alignContent: "center",
+		justifyContent: "center",
+	},
 	subtitle: {
 		marginTop: 0,
 	},
@@ -33,7 +40,6 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		color: Palette.FOREGROUND,
-		flexShrink: 0,
 		fontSize: 84,
 		fontWeight: "700",
 	},
