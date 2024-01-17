@@ -19,7 +19,7 @@ import { GlobalStyles } from "~/styles";
 export function Colors() {
 	const [count, setCount] = useState(0);
 
-	const { pan, color } = useColorsGesture(setCount);
+	const { pan, color, handleNext, handlePrev } = useColorsGesture(setCount);
 
 	const style = useAnimatedStyle(() => ({
 		backgroundColor: withTiming(color.value, {
@@ -34,7 +34,11 @@ export function Colors() {
 				<View style={styles.content}>
 					<Intro />
 				</View>
-				<ColorsInfoBox count={count} />
+				<ColorsInfoBox
+					onNext={handleNext}
+					onPrev={handlePrev}
+					count={count}
+				/>
 			</Animated.View>
 		</GestureDetector>
 	);

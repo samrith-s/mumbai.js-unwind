@@ -1,6 +1,6 @@
 import React from "react";
 
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 
 import { BlurView } from "expo-blur";
 
@@ -12,68 +12,96 @@ import { Text } from "~/components/Text";
 
 export type ColorsInfoBoxProps = {
 	count: number;
+	onNext(): void;
+	onPrev(): void;
 };
 
-export function ColorsInfoBox({ count }: ColorsInfoBoxProps) {
+export function ColorsInfoBox({ count, onNext, onPrev }: ColorsInfoBoxProps) {
 	return (
 		<View style={styles.infoBox}>
-			<View style={styles.actionBox}>
-				<Feather
-					name="arrow-left"
-					size={24}
-					color="white"
-				/>
-				<Text>Swipe</Text>
-				<Feather
-					name="arrow-right"
-					size={24}
-					color="white"
-				/>
-			</View>
+			<Pressable onPress={onPrev}>
+				<BlurView
+					style={styles.nav}
+					tint="dark"
+					intensity={35}
+					blurReductionFactor={1}
+				>
+					<Feather
+						name="arrow-left"
+						size={24}
+						color="white"
+					/>
+				</BlurView>
+			</Pressable>
+
 			<BlurView
-				tint="light"
-				intensity={10}
+				tint="dark"
+				intensity={80}
 				blurReductionFactor={1}
 				style={styles.info}
 			>
-				<BackButton />
-				<Text>
+				<Text style={styles.count}>
 					{count} of {COLORS_LIST_LENGTH}
 				</Text>
+				<BackButton
+					tint="light"
+					intensity={10}
+					iconOnly
+				/>
 			</BlurView>
+
+			<Pressable onPress={onNext}>
+				<BlurView
+					style={styles.nav}
+					tint="dark"
+					intensity={35}
+					blurReductionFactor={1}
+				>
+					<Feather
+						name="arrow-right"
+						size={24}
+						color="white"
+					/>
+				</BlurView>
+			</Pressable>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	actionBox: {
-		alignItems: "center",
-		flexDirection: "row",
-		gap: 20,
-		justifyContent: "center",
-		opacity: 0.5,
+	count: {
+		minWidth: 75,
+		textAlign: "right",
 	},
 	info: {
 		alignItems: "center",
 		borderRadius: 999,
 		flexDirection: "row",
 		gap: 10,
-		height: "auto",
+		height: 52,
 		justifyContent: "center",
-		marginLeft: 10,
 		overflow: "hidden",
-		paddingHorizontal: 16,
+		paddingHorizontal: 10,
 		paddingVertical: 10,
 		textAlign: "center",
 	},
 	infoBox: {
 		alignItems: "center",
 		bottom: 50,
+		flexDirection: "row",
 		gap: 10,
 		justifyContent: "center",
 		left: 0,
 		position: "absolute",
 		right: 0,
 		zIndex: 999,
+	},
+	nav: {
+		alignItems: "center",
+		borderRadius: 999,
+		height: 52,
+		justifyContent: "center",
+		overflow: "hidden",
+		width: 52,
 	},
 });
