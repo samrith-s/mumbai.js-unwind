@@ -17,8 +17,6 @@ export const DATA = Array.from({ length: COUNT }).map<Breathe>((_, i) => {
 		initial = initial - STEPS;
 	}
 
-	i === COUNT - 1 && console.log("Final initial", initial);
-
 	return {
 		date: sub(new Date(), {
 			days: initial,
