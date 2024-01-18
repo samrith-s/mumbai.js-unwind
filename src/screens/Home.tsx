@@ -2,6 +2,7 @@ import React from "react";
 
 import { StyleSheet, View } from "react-native";
 
+import { Feather } from "@expo/vector-icons";
 import { StackActions, useNavigation } from "@react-navigation/native";
 
 import { useColor } from "~/color";
@@ -33,6 +34,22 @@ export function Home() {
 
 				<View style={styles.buttonGroup}>
 					<Button
+						blurBg
+						intensity={10}
+						style={styles.button}
+						icon={
+							<Feather
+								name="sun"
+								color="white"
+								size={24}
+							/>
+						}
+						onPress={() => {
+							navigation.dispatch(StackActions.push(Routes.COLORS));
+						}}
+					/>
+
+					<Button
 						style={[
 							styles.button,
 							{
@@ -48,11 +65,16 @@ export function Home() {
 					<Button
 						blurBg
 						intensity={10}
-						blurReductionFactor={200}
 						style={styles.button}
-						label="Choose color"
+						icon={
+							<Feather
+								name="list"
+								color="white"
+								size={24}
+							/>
+						}
 						onPress={() => {
-							navigation.dispatch(StackActions.push(Routes.COLORS));
+							navigation.dispatch(StackActions.push(Routes.LIST));
 						}}
 					/>
 				</View>
@@ -76,8 +98,9 @@ const styles = StyleSheet.create({
 		width: "auto",
 	},
 	buttonGroup: {
+		alignItems: "center",
 		flexDirection: "row",
-		gap: 20,
+		gap: 8,
 	},
 	container: {
 		...GlobalStyles.container,

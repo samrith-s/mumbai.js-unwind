@@ -2,11 +2,12 @@ import React from "react";
 
 import {
 	Pressable,
-	type PressableProps,
 	StyleSheet,
+	type PressableProps,
 	type StyleProp,
 	type TextStyle,
 	type ViewStyle,
+	View,
 } from "react-native";
 
 import { BlurView, type BlurTint } from "expo-blur";
@@ -17,9 +18,11 @@ import { Palette } from "~/styles";
 
 export type ButtonProps = PressableProps & {
 	children?: never;
-	label: string;
+	label?: string;
 	labelStyle?: StyleProp<TextStyle>;
 	style?: StyleProp<ViewStyle>;
+	icon?: JSX.Element;
+	iconOnly?: boolean;
 } & (
 		| {
 				blurBg: true;
@@ -43,8 +46,12 @@ export function Button({
 	intensity,
 	tint,
 	blurReductionFactor,
+	icon,
+	iconOnly,
 	...rest
 }: ButtonProps) {
+	const iconWrapped = !!icon && <View style={styles.icon}>{icon}</View>;
+
 	if (blurBg) {
 		return (
 			<Pressable {...rest}>
@@ -54,7 +61,10 @@ export function Button({
 					tint={tint}
 					intensity={intensity}
 				>
-					<Text style={[styles.buttonText, labelStyle]}>{label}</Text>
+					{iconWrapped}
+					{!iconOnly && (
+						<Text style={[styles.buttonText, labelStyle]}>{label}</Text>
+					)}
 				</BlurView>
 			</Pressable>
 		);
@@ -65,7 +75,10 @@ export function Button({
 			{...rest}
 			style={[styles.button, style]}
 		>
-			<Text style={[styles.buttonText, labelStyle]}>{label}</Text>
+			{iconWrapped}
+			{!iconOnly && (
+				<Text style={[styles.buttonText, labelStyle]}>{label}</Text>
+			)}
 		</Pressable>
 	);
 }
@@ -78,11 +91,15 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: Palette.BACKGROUND_OFFSET,
 		borderRadius: 999,
+		flexDirection: "row",
 		justifyContent: "center",
 		paddingHorizontal: 24,
 		paddingVertical: 12,
 	},
 	buttonText: {
 		fontSize: 16,
+	},
+	icon: {
+		marginRight: 5,
 	},
 });
