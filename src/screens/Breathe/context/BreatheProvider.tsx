@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { BreatheContext } from "./BreatheContext";
+import { BreatheContext, type BreatheContextValue } from "./BreatheContext";
 
 export type BreatheProviderProps = {
 	children: React.ReactNode;
+	value: BreatheContextValue;
 };
 
-export function BreatheProvider({ children }: BreatheProviderProps) {
-	const state = useState(false);
-
+export function BreatheProvider({ children, value }: BreatheProviderProps) {
 	return (
-		<BreatheContext.Provider value={state}>{children}</BreatheContext.Provider>
+		<BreatheContext.Provider value={value}>{children}</BreatheContext.Provider>
 	);
 }

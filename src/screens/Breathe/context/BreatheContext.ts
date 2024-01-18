@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
+import { BreatheState } from "../Breathe.interface";
+
 export type BreatheContextValue = [
-	breathing: boolean,
-	setBreathing: React.Dispatch<React.SetStateAction<boolean>>,
+	breathing: BreatheState,
+	setBreathing: React.Dispatch<React.SetStateAction<BreatheState>>,
 ];
 
 export const BreatheContext = createContext<BreatheContextValue>([
-	false,
+	BreatheState.COUNTDOWN,
 	() => {},
 ]);

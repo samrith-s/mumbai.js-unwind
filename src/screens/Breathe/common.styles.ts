@@ -6,6 +6,9 @@ export const commonStyles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	content: StyleSheet.absoluteFillObject,
+	largeText: {
+		fontSize: 72,
+	},
 	wrapper: {
 		flex: 1,
 		position: "relative",

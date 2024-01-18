@@ -35,10 +35,15 @@ export function BreatherSlice({ layout, index, animate }: BreatherSliceProps) {
 						duration: 3000,
 						easing: Easing.in(Easing.elastic(0.2)),
 					}),
-					10,
+					-1,
 					true
 				)
 			);
+		} else {
+			scale.value = withTiming(1, {
+				duration: 1000,
+				easing: Easing.in(Easing.elastic(0.2)),
+			});
 		}
 	}, [animate, index]);
 

@@ -23,6 +23,13 @@
 				"skip": ["Strong", "Bold"]
 			}
 		],
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"varsIgnorePattern": "^_",
+				"args": "after-used"
+			}
+		],
 		"@typescript-eslint/consistent-type-imports": [
 			"error",
 			{

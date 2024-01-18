@@ -19,6 +19,7 @@ export type BackButtonProps = {
 	tint?: BlurTint;
 	style?: StyleProp<ViewStyle>;
 	iconOnly?: boolean;
+	onPress?(): void;
 };
 
 export function BackButton({
@@ -26,6 +27,7 @@ export function BackButton({
 	intensity,
 	tint = "dark",
 	iconOnly,
+	onPress,
 }: BackButtonProps) {
 	const navigation = useNavigation();
 
@@ -33,7 +35,9 @@ export function BackButton({
 		<Pressable
 			style={[styles.cross, iconOnly && styles.crossIconOnly, style]}
 			onPress={() => {
-				if (navigation.canGoBack()) {
+				if (onPress) {
+					onPress();
+				} else if (navigation.canGoBack()) {
 					navigation.goBack();
 				}
 			}}
