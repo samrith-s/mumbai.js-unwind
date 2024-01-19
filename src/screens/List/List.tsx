@@ -6,10 +6,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { groupData } from "./group-data";
 
-import { renderItem, renderSectionHeader } from "./renderItem";
+import { keyExtractor, renderItem, renderSectionHeader } from "./renderItem";
 
-import { Box } from "~/components/Box";
-import { Bold, Text } from "~/components/Text";
+import { Bold } from "~/components/Text";
 import { GlobalStyles, Palette } from "~/styles";
 
 export function List() {
@@ -25,6 +24,7 @@ export function List() {
 			<SectionList
 				sections={data}
 				renderItem={renderItem}
+				keyExtractor={keyExtractor}
 				renderSectionHeader={renderSectionHeader}
 				style={GlobalStyles.container}
 				contentContainerStyle={styles.list}

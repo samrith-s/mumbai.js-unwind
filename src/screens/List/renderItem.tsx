@@ -6,6 +6,10 @@ import { type Entry, type SectionData } from "./List.interface";
 import { ListHeader } from "./ListHeader";
 import { ListItem } from "./ListItem";
 
+export function keyExtractor(item: Entry, index: number) {
+	return `${item.date.toString()}-${index}`;
+}
+
 export function renderItem({ item, index }: ListRenderItemInfo<Entry>) {
 	return (
 		<ListItem

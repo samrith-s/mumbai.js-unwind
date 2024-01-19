@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { StyleSheet } from "react-native";
 
@@ -13,17 +13,20 @@ export type ListHeaderProps = {
 	data: SectionData;
 };
 
-export function ListHeader({ data }: ListHeaderProps) {
-	return (
-		<BlurView
-			tint="dark"
-			intensity={50}
-			style={styles.container}
-		>
-			<Bold style={styles.text}>{data?.title}</Bold>
-		</BlurView>
-	);
-}
+export const ListHeader = memo(
+	function ListHeader({ data }: ListHeaderProps) {
+		return (
+			<BlurView
+				tint="dark"
+				intensity={50}
+				style={styles.container}
+			>
+				<Bold style={styles.text}>{data?.title}</Bold>
+			</BlurView>
+		);
+	},
+	(prev, next) => prev.data.title !== next.data.title
+);
 
 const styles = StyleSheet.create({
 	container: {

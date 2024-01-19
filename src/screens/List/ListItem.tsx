@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { StyleSheet, View } from "react-native";
 
@@ -18,7 +18,7 @@ export type ListItemProps = {
 	index: number;
 };
 
-export function ListItem({
+export const ListItem = memo(function ListItem({
 	data: { date, time, grade, color },
 	index,
 }: ListItemProps) {
@@ -34,7 +34,7 @@ export function ListItem({
 			<Text style={styles.textTime}>{format(date, "hh:mm aaa")}</Text>
 		</View>
 	);
-}
+});
 
 const styles = StyleSheet.create({
 	item: {
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		gap: 10,
 		justifyContent: "space-between",
-		marginTop: 10,
 		padding: 20,
 	},
 	left: {
